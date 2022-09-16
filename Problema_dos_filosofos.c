@@ -21,12 +21,12 @@
 #define filosofo_comendo 2 
 //identificador de filosofo_comendo
 
-sem_t sem[quant_filosofos];//inicia semaforo
+sem_t sem[quant_filosofos];// inicia semaforo
 sem_t mutex;
-int estado [quant_filosofos];// estado em que os filosofos se encontram
+int estado [quant_filosofos];// atual posição que o filosofo se encontra
 int num_filosofo[quant_filosofos]= {0,1,2,3,4};// inicializa filosofos
 
-// funções
+//Funções//
 void *fil(void *n);
 void pegar_garfo(int);
 void soltar_garfo(int);
@@ -38,7 +38,7 @@ void pegar_garfo(int num_filosofo)
 {
   sem_wait(&mutex);
   estado[num_filosofo]= filosofo_com_fome;
-  printf("Filosofo de numero %d esta com fome \n",num_filosofo+1);// print desde o 1
+  printf("Filosofo de numero %d esta com fome \n",num_filosofo+1);// print desde o 1º
   test(num_filosofo);
   sem_post(&mutex);
   sem_wait(&sem[num_filosofo]);
@@ -77,19 +77,19 @@ void *fil(void *n)
 int main()
 {
   int i;
-  pthread_t ident_tr[quant_filosofos];//identificador de thread
+  pthread_t ident_tr[quant_filosofos];// identificador de thread
   sem_init(&mutex,0,1);
   for(i=0; i<quant_filosofos; i++)
     sem_init(&sem[i],0,0);
   for(i=0;i<quant_filosofos;i++)
   {
-    pthread_create(&ident_tr[i], NULL, fil, &num_filosofo[i]);//criador de threads necessarias
-    printf("Filosofo de numero %d esta aguardando.\n",i+1);//imprime filosofo que esta pensando
+    pthread_create(&ident_tr[i], NULL, fil, &num_filosofo[i]);// criador de threads necessarias
+    printf("Filosofo de numero %d esta aguardando.\n",i+1);// imprime filosofo que esta aguardando
   }
   printf("\n");
   for(i=0;i<quant_filosofos;i++)
   {
-    pthread_join(ident_tr[i],NULL);// Thread principal aguarda as outras threads
+    pthread_join(ident_tr[i],NULL);// thread principal aguarda as outras threads
   }
   return(0);
 }
