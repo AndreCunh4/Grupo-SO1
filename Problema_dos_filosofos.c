@@ -26,7 +26,6 @@ void pegar_garfo(int);
 void soltar_garfo(int);
 void test(int);
 
-
 //Função pega garfo//
 
 void pegar_garfo(int num_filosofo)
@@ -39,8 +38,6 @@ void pegar_garfo(int num_filosofo)
   sem_wait(&sem[num_filosofo]);
   sleep(1);
 }
-
-
 
 //Função solta garfo//
 
@@ -55,10 +52,7 @@ void soltar_garfo(int num_filosofo)
   sem_post(&mutex);
 }
 
-
-
-
-//Função fill//
+//Função filosofos//
 
 void *fil(void *n)
 {
@@ -71,9 +65,6 @@ void *fil(void *n)
    soltar_garfo(*i);
   }
 }
-
-
-
 
 //Função main//
 
@@ -96,8 +87,6 @@ int main()
   }
   return(0);
 }
-
-
 
 //Função teste//
 
