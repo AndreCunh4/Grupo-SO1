@@ -1,6 +1,12 @@
 //Andre Cunh TIA:32073801
 //Pedro Augusto Lima TIA:32136374
 
+
+
+/////////////////////////////PROBLEMA DOS FILOSOFOS////////////////////////////////////////
+
+
+
 #include <stdio.h>
 #include <semaphore.h>
 #include <pthread.h>
