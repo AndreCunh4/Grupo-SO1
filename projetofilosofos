@@ -58,7 +58,7 @@ void soltar_garfo(int num_filosofo)
 
 
 
-//Função fill//
+//Função filosofos//
 
 void *fil(void *n)
 {
@@ -87,7 +87,7 @@ int main()
   for(i=0;i<quant_filosofos;i++)
   {
     pthread_create(&ident_tr[i], NULL, fil, &num_filosofo[i]);//criador de threads necessarias
-    printf("Filosofo de numero %d esta aguardando.\n",i+1);//imprime filosofo que esta pensando
+    printf("Filosofo de numero %d esta aguardando.\n",i+1);//imprime filosofo que esta aguardando
   }
   printf("\n");
   for(i=0;i<quant_filosofos;i++)
