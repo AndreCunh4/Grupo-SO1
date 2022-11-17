@@ -17,7 +17,8 @@ pthread_mutex_t regiaoCritica;
 
 // Funcao para cada Thread
 int transferencia( void *arg){
-  //bloqueando as var from.saldo e to.saldo
+//Entra na região crítica
+//bloqueando as var from.saldo e to.saldo
   pthread_mutex_lock(&regiaoCritica);
   if (from.saldo >= valor){ // 2
     printf( "Transferindo 10 para a conta c2\n" );
@@ -31,27 +32,29 @@ int transferencia( void *arg){
   printf("Transferência concluída com sucesso!\n");
   printf("Saldo de c1: %d\n", from.saldo);
   printf("Saldo de c2: %d\n", to.saldo);
-  //desbloqueando as var from.saldo e to.saldo
+//desbloqueando as var from.saldo e to.saldo
   pthread_mutex_unlock (&regiaoCritica);
   return 0;
 }
 
+
+
 int main(){
-  //iniciando a variavel mutex
+//iniciando a variavel mutex
   pthread_mutex_init(&regiaoCritica, NULL);
-  //vetor do tipo pthread_t
+//vetor do tipo pthread_t
   pthread_t threads[100];
   int i;
-  // Todas as contas começam com saldo 100
+// Todas as contas começam com saldo 100
   from.saldo = 100;
   to.saldo = 100;
   valor = 10;
   for (i = 0; i < 100; i++) {
-  // Criando Thread
+// Criando Thread
     pthread_create(&threads[i], NULL, &transferencia, NULL);
   }
   for (i = 0; i < 100; i++){
-  //  Terminando Thread
+//  Terminando Thread
     pthread_join(threads[i], NULL);
   }
   printf("Transferências concluídas e memória liberada.\n");
